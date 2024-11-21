@@ -34,9 +34,8 @@ Route::resource('customers', CustomerController::class);
 Route::resource('items', ItemController::class);
 
 // Invoice
-Route::get('/invoices/{invoice}/pdf', [PDFController::class, 'generateInvoicePDF'])->name('invoices.pdf');
 Route::resource('invoices', InvoiceController::class);
-Route::resource('invoice_items', InvoiceItemController::class);
+Route::post('invoices/{invoice}/recurring', [InvoiceController::class, 'scheduleRecurring'])->name('invoices.recurring');
 
 // Expense
 Route::resource('expenses', ExpenseController::class);
@@ -52,6 +51,9 @@ Route::resource('payments', PaymentController::class);
 
 // Credit Note
 Route::resource('credit_notes', CreditNoteController::class);
+
+// PDF
+Route::get('/invoices/{invoice}/pdf', [PDFController::class, 'generateInvoicePDF'])->name('invoices.pdf');
 
 // Setting
 

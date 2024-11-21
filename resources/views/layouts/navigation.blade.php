@@ -46,9 +46,9 @@
                                 </x-dropdown-link>
 
                                 <!-- Invoice Items -->
-                                <x-dropdown-link :href="route('invoice_items.index')" :active="request()->routeIs('invoice_items.*')">
-                                    {{ __('Invoice Items') }}
-                                </x-dropdown-link>
+{{--                                <x-dropdown-link :href="route('invoice_items.index')" :active="request()->routeIs('invoice_items.*')">--}}
+{{--                                    {{ __('Invoice Items') }}--}}
+{{--                                </x-dropdown-link>--}}
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -150,9 +150,9 @@
             </x-responsive-nav-link>
 
             <!-- Invoices Items -->
-            <x-responsive-nav-link :href="route('invoice_items.index')" :active="request()->routeIs('invoices_items.*')">
-                {{ __('Invoice Items') }}
-            </x-responsive-nav-link>
+{{--            <x-responsive-nav-link :href="route('invoice_items.index')" :active="request()->routeIs('invoices_items.*')">--}}
+{{--                {{ __('Invoice Items') }}--}}
+{{--            </x-responsive-nav-link>--}}
 
             <!-- Expenses -->
             <x-responsive-nav-link :href="route('expenses.index')" :active="request()->routeIs('expenses.*')">

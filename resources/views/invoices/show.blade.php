@@ -7,36 +7,48 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <p><strong>Customer:</strong> {{ $invoice->customer->name }}</p>
-                    <p><strong>Total:</strong> ${{ $invoice->total }}</p>
-                    <p><strong>Tax:</strong> ${{ $invoice->tax }}</p>
-                    <p><strong>Status:</strong> {{ ucfirst($invoice->status) }}</p>
+                    <!-- Customer and Invoice Details -->
+                    <div class="space-y-4">
+                        <p><strong>Customer:</strong> {{ $invoice->customer->name }}</p>
+                        <p><strong>Total:</strong> ${{ number_format($invoice->total, 2) }}</p>
+                        <p><strong>Tax:</strong> ${{ number_format($invoice->tax, 2) }}</p>
+                        <p><strong>Status:</strong> <span class="px-2 py-1 rounded text-sm font-medium
+                            {{ $invoice->status === 'paid' ? 'bg-green-200 text-green-800' : ($invoice->status === 'pending' ? 'bg-yellow-200 text-yellow-800' : 'bg-red-200 text-red-800') }}">
+                            {{ ucfirst($invoice->status) }}
+                        </span></p>
+                    </div>
 
+                    <!-- Invoice Items -->
                     <h3 class="mt-6 text-lg font-semibold">Invoice Items</h3>
-                    <table class="table-auto w-full border-collapse border border-gray-200 dark:border-gray-700 mt-4">
-                        <thead>
+                    <table class="table-auto w-full border-collapse border border-gray-300 dark:border-gray-700 mt-4">
+                        <thead class="bg-gray-100 dark:bg-gray-900">
                         <tr>
-                            <th class="border border-gray-200 dark:border-gray-700 px-4 py-2">Item</th>
-                            <th class="border border-gray-200 dark:border-gray-700 px-4 py-2">Quantity</th>
-                            <th class="border border-gray-200 dark:border-gray-700 px-4 py-2">Price</th>
-                            <th class="border border-gray-200 dark:border-gray-700 px-4 py-2">Total</th>
+                            <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-left">Item</th>
+                            <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-center">Quantity</th>
+                            <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-right">Price</th>
+                            <th class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-right">Total</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($invoice->items as $item)
                             <tr>
-                                <td class="border border-gray-200 dark:border-gray-700 px-4 py-2">{{ $item->item->name }}</td>
-                                <td class="border border-gray-200 dark:border-gray-700 px-4 py-2">{{ $item->quantity }}</td>
-                                <td class="border border-gray-200 dark:border-gray-700 px-4 py-2">${{ $item->price }}</td>
-                                <td class="border border-gray-200 dark:border-gray-700 px-4 py-2">${{ $item->total }}</td>
+                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2">{{ $item->item->name }}</td>
+                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-center">{{ $item->quantity }}</td>
+                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-right">${{ number_format($item->price, 2) }}</td>
+                                <td class="border border-gray-300 dark:border-gray-700 px-4 py-2 text-right">${{ number_format($item->total, 2) }}</td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
 
-                    <a href="{{ route('invoices.index') }}" class="mt-6 inline-block text-blue-500 hover:underline">Back to Invoices</a>
+                    <!-- Back to Invoices Button -->
+                    <div class="mt-6">
+                        <a href="{{ route('invoices.index') }}" class="inline-block px-4 py-2 bg-blue-600 text-white font-medium text-sm rounded-md shadow hover:bg-blue-700">
+                            Back to Invoices
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

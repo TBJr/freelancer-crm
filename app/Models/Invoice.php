@@ -14,7 +14,14 @@ class Invoice extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['customer_id', 'total', 'tax', 'status'];
+    protected $fillable = [
+        'customer_id',
+        'total',
+        'tax',
+        'status',
+        'is_recurring',
+        'recurring_period'
+    ];
 
     /**
      * Relationship with Customer

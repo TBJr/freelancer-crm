@@ -7,6 +7,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\InvoiceItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TimesheetController;
@@ -33,6 +34,7 @@ Route::resource('customers', CustomerController::class);
 Route::resource('items', ItemController::class);
 
 // Invoice
+Route::get('/invoices/{invoice}/pdf', [PDFController::class, 'generateInvoicePDF'])->name('invoices.pdf');
 Route::resource('invoices', InvoiceController::class);
 Route::resource('invoice_items', InvoiceItemController::class);
 

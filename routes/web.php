@@ -4,7 +4,6 @@ use App\Http\Controllers\CreditNoteController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\InvoiceItemController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PDFController;
@@ -26,6 +25,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//Test Routes
+Route::group(['middleware' => ['role:Admin']], function () {
+    Route::get('/admin', [AdminController::class, 'index']);
+});
+
+Route::group(['middleware' => ['permission:manage users']], function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
+// End of test routes
 
 // Customer
 Route::resource('customers', CustomerController::class);
